@@ -1,4 +1,4 @@
-# Geographically Weighted Regression (GWR) with Temporal Variable
+# Temporal-Integrated Geographically Weighted Regression for Modeling Spatial Heterogeneity and Temporal Variation: A Case Study of PM10 Concentration in DKI Jakarta, 2023
 
 This repository contains an implementation of a Geographically Weighted Regression (GWR) model that incorporates a temporal variable as an independent predictor. The goal is to model the concentration of Particulate Matter 10 (PM10) in DKI Jakarta throughout the year 2023 while addressing spatial heterogeneity and considering temporal effects.
 
