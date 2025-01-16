@@ -8,15 +8,16 @@ This repository contains an implementation of a Geographically Weighted Regressi
 In spatial analysis, GWR is widely used to model spatial heterogeneity by estimating local regression coefficients for each observation location. However, many real-world datasets also include temporal dimensions that influence the dependent variable. This project extends the standard GWR by integrating a temporal variable to improve the model's explanatory power. 
 
 ### Key Features:
-- Implementation of GWR with the ability to include temporal variables.
+- Implementation of GWR with the ability to include temporal variables, with time-related feature engineering using the sin/cos method.
 - Optimization of bandwidth for spatial weighting using Cross Validation (CV).
 - Analysis of PM10 concentration across five regions in DKI Jakarta using meteorological variables.
+- Evaluation of model fit and performance metrics using Mean Absolute Error (MAE), Mean Absolute Percentage Error (MAPE), and Root Mean Squared Error (RMSE).
 
 
 ## Difference Between This Model and GTWR
 
-- This Model (GWR with Temporal Variable): Estimates regression coefficients for each location (city), incorporating a temporal variable as an additional independent predictor. Coefficients are spatially varying but constant over time for each location.
-- GTWR (Geographically and Temporally Weighted Regression): Estimates regression coefficients for each location (city) in each time unit, allowing coefficients to vary across both space and time.
+- This Model (GWR with Temporal Variable): Estimates regression coefficients for each location (city), incorporating a temporal variable as an additional independent predictor. Coefficients are spatially varying.
+- GTWR (Geographically and Temporally Weighted Regression): Estimates regression coefficients for each location (city) in each time unit, allowing coefficients to vary across both space and time. As a result, GTWR links parameters to specific locations and times, significantly increasing the number of estimated parameters.
 
 
 ## Dataset
@@ -53,10 +54,11 @@ The dataset used in this project includes spatial and temporal observations for 
 
 
 ## Results
-- Fixed and adaptive kernels were tested, with each kernel using Gaussian, Exponential, and Bisquare functions.
-- The best kernel function was selected based on AIC and R-squared values.
-- The model was built using the selected kernel function.
-- The model was evaluated using Mean Absolute Error (MAE), Mean Absolute Percentage Error (MAPE), and Root Mean Squared Error (RMSE).
+- The best kernel was selected based on AIC and R-squared values among fixed and adaptive kernels, with each kernel using Gaussian, Exponential, and Bisquare functions. The best kernel found was fixed exponential with an AIC of 2085.17 and an R-squared of 64.91%.
+- Based on the seasonal components chart of PM10 data for each city, it was revealed that PM10 follows a "weekly" seasonal pattern. As a result, the "weekly" temporal feature was used as an additional variable and processed using the sin/cos method.
+- A GWR model was developed for each city. Significant parameters for each location were determined through partial parameter tests in GWR.
+- The model passed residual normality tests (p=0.215 > 0.05) and local multicollinearity tests (local VIF < 10), confirming its validity for modeling PM10 concentration in DKI Jakarta.
+The model achieved the following performance metrics on test data: MAE = 15.21, MAPE = 9.00, and RMSE = 11.61.
 
 
 ## References
